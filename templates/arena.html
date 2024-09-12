@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Меню арены
+{% endblock %}
+
+{% block body %}
+<div class="about">
+    <div class="scroll">
+        <img src="{{ url_for('static', filename='css/2.png') }}" class="main-image" alt="Main Image">
+        <div class="center-container">
+            {% set links = [
+                'link1', 
+                'link2', 
+                'link3', 
+                'link4', 
+                'link5', 
+                'link6', 
+                'link7', 
+                'link8', 
+                'link9', 
+                'link10', 
+                'link11', 
+                'link12'
+            ] %}
+            {% for i in range(12) %}
+                <a href="{{ url_for(links[i]) }}" class="button">Кнопка {{ i + 1 }}</a>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+{% endblock %}
