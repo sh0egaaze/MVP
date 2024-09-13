@@ -17,13 +17,9 @@ body {
 /* Стили для кнопок */
 .center-buttons, .top-buttons {
     display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
     margin-top: 20px;
-}
-
-/* Кнопки в top-buttons выстраиваются вертикально */
-.top-buttons {
-    flex-direction: column; /* Выравнивание элементов по колонкам */
-    align-items: center; /* Центрирование кнопок по горизонтали */
 }
 
 /* Белые кнопки */
