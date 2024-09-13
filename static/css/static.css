@@ -14,7 +14,7 @@ body {
     margin: 0 auto;
 }
 
-/* Стили для кнопок */
+
 .center-buttons, .top-buttons {
     display: flex;
     flex-wrap: wrap;
@@ -22,10 +22,10 @@ body {
     margin-top: 20px;
 }
 
-/* Белые кнопки */
+
 .center-buttons .button, .top-buttons .button {
-    background: #ffffff; /* Белый фон */
-    color: #000000; /* Черный текст */
+    background: #ffffff; 
+    color: #000000; 
     padding: 10px 20px;
     margin: 5px;
     text-decoration: none;
@@ -35,33 +35,33 @@ body {
     filter: drop-shadow(0 0 5px rgba(0, 0, 0, 0.5));
 }
 
-/* Стили для кнопок в .top-buttons (одна под другой) */
+
 .top-buttons .button {
-    flex: 0 1 100%; /* Каждая кнопка занимает 100% ширины контейнера */
+    flex: 0 1 100%; 
 }
 
-/* Стили для кнопок в .center-buttons (по две в ряд) */
+
 .center-buttons .button {
-    flex: 0 1 calc(50% - 10px); /* По 2 кнопки в ряд с учетом отступов */
+    flex: 0 1 calc(50% - 10px); 
 }
 
-/* Стили для кнопок при наведении */
+
 .button:hover {
-    background: #f0f0f0; /* Легкий серый фон при наведении */
-    color: #000000; /* Черный текст при наведении */
+    background: #f0f0f0;
+    color: #000000; 
     transform: scale(1.05);
 }
 
-/* Адаптивность для мобильных устройств */
+
 @media (max-width: 600px) {
     .center-buttons .button {
-        flex: 0 1 calc(50% - 10px); /* По 2 кнопки в ряд на мобильных */
+        flex: 0 1 calc(50% - 10px); 
     }
 }
 
-/* Стили для картинки */
+
 .main-image {
-    max-width: 100%; /* Ширина картинки не больше ширины контейнера */
-    height: auto; /* Высота автоматически сохраняется в пропорциях */
-    margin-top: 20px; /* Отступ сверху */
+    max-width: 100%; 
+    height: auto; 
+    margin-top: 20px; 
 }
