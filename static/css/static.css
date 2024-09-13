@@ -24,27 +24,28 @@ body {
 .center-buttons .button, .top-buttons .button {
     background: #ffffff;
     color: #000000;
-    padding: 8px 16px;
+    padding: 10px 20px;
     margin: 5px;
     text-decoration: none;
-    border-radius: 5px;
-    transition: background-color 0.3s, transform 0.2s;
+    border-radius: 8px;
+    transition: background-color 0.3s, transform 0.2s, box-shadow 0.3s;
     box-sizing: border-box;
-    filter: drop-shadow(0 0 5px rgba(0, 0, 0, 0.5));
+    filter: drop-shadow(0 0 4px rgba(0, 0, 0, 0.3));
 }
 
 .top-buttons .button {
-    flex: 0 1 100%;
+    flex: 0 1 250px;
 }
 
 .center-buttons .button {
-    flex: 0 1 calc(33.33% - 10px);
+    flex: 0 1 200px;
 }
 
 .button:hover {
     background: #f0f0f0;
     color: #000000;
     transform: scale(1.05);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 
 @media (max-width: 600px) {
