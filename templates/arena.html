@@ -8,29 +8,14 @@
 <div class="about">
     <div class="scroll">
         <div class="top-buttons">
-            {% set top_links = ['top_link1', 'top_link2', 'top_link3', 'top_link4'] %}
             {% for i in range(4) %}
-                <a href="{{ url_for(link1.html[i]) }}" class="button">Верхняя кнопка {{ i + 1 }}</a>
+                <a href="#" class="button">Верхняя кнопка {{ i + 1 }}</a>
             {% endfor %}
         </div>
         
         <div class="center-container">
-            {% set links = [
-                'link1', 
-                'link2', 
-                'link3', 
-                'link4', 
-                'link5', 
-                'link6', 
-                'link7', 
-                'link8', 
-                'link9', 
-                'link10', 
-                'link11', 
-                'link12'
-            ] %}
             {% for i in range(12) %}
-                <a href="{{ url_for(links[i]) }}" class="button">Кнопка {{ i + 1 }}</a>
+                <a href="#" class="button">Кнопка {{ i + 1 }}</a>
             {% endfor %}
         </div>
     </div>
