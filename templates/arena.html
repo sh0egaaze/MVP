@@ -7,7 +7,13 @@
 {% block body %}
 <div class="about">
     <div class="scroll">
-        <img src="{{ url_for('static', filename='css/2.png') }}" class="main-image" alt="Main Image">
+        <div class="top-buttons">
+            {% set top_links = ['top_link1', 'top_link2', 'top_link3', 'top_link4'] %}
+            {% for i in range(4) %}
+                <a href="{{ url_for(top_links[i]) }}" class="button">Верхняя кнопка {{ i + 1 }}</a>
+            {% endfor %}
+        </div>
+        
         <div class="center-container">
             {% set links = [
                 'link1', 
