@@ -15,7 +15,7 @@ body {
 }
 
 /* Стили для кнопок */
-.center-buttons {
+.center-buttons, .top-buttons {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
