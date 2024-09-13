@@ -31,20 +31,30 @@ body {
     text-decoration: none;
     border-radius: 5px;
     transition: background-color 0.3s, transform 0.2s;
-    flex: 0 1 calc(16.66% - 10px); /* 6 кнопок в ряду */
     box-sizing: border-box;
     filter: drop-shadow(0 0 5px rgba(0, 0, 0, 0.5));
 }
 
+/* Стили для кнопок в .top-buttons (одна под другой) */
+.top-buttons .button {
+    flex: 0 1 100%; /* Каждая кнопка занимает 100% ширины контейнера */
+}
+
+/* Стили для кнопок в .center-buttons (по две в ряд) */
+.center-buttons .button {
+    flex: 0 1 calc(50% - 10px); /* По 2 кнопки в ряд с учетом отступов */
+}
+
+/* Стили для кнопок при наведении */
 .button:hover {
-    background: #ffffff; /* Белый фон при наведении */
+    background: #f0f0f0; /* Легкий серый фон при наведении */
     color: #000000; /* Черный текст при наведении */
     transform: scale(1.05);
 }
 
 /* Адаптивность для мобильных устройств */
 @media (max-width: 600px) {
-    .center-buttons .button, .top-buttons .button {
+    .center-buttons .button {
         flex: 0 1 calc(50% - 10px); /* По 2 кнопки в ряд на мобильных */
     }
 }
