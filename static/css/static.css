@@ -34,11 +34,11 @@ body {
 }
 
 .top-buttons .button {
-    flex: 0 1 100%;
+    flex: 0 1 200px;
 }
 
 .center-buttons .button {
-    flex: 0 1 calc(33.33% - 10px);
+    flex: 0 1 150px;
 }
 
 .button:hover {
