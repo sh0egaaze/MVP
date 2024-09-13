@@ -23,7 +23,7 @@ body {
 }
 
 /* Белые кнопки */
-.center-buttons .button {
+.center-buttons .button, .top-buttons .button {
     background: #ffffff; /* Белый фон */
     color: #000000; /* Черный текст */
     padding: 10px 20px;
@@ -37,14 +37,14 @@ body {
 }
 
 .button:hover {
-    background: #f0f0f0; /* Легкий серый фон при наведении */
+    background: #ffffff; /* Белый фон при наведении */
     color: #000000; /* Черный текст при наведении */
     transform: scale(1.05);
 }
 
 /* Адаптивность для мобильных устройств */
 @media (max-width: 600px) {
-    .center-buttons .button {
+    .center-buttons .button, .top-buttons .button {
         flex: 0 1 calc(50% - 10px); /* По 2 кнопки в ряд на мобильных */
     }
 }
