@@ -8,24 +8,22 @@
 <div class="about">
     <div class="scroll">
         <img src="{{ url_for('static', filename='css/1.png') }}" class="main-image" alt="Main Image">
-        <div class="center-container">
-            {% set links = [
-                'link1', 
-                'link2', 
-                'link3', 
-                'link4', 
-                'link5', 
-                'link6', 
-                'link7', 
-                'link8', 
-                'link9', 
-                'link10', 
-                'link11', 
-                'link12'
-            ] %}
-            {% for i in range(12) %}
-                <a href="{{ url_for(links[i]) }}" class="button">Кнопка {{ i + 1 }}</a>
-            {% endfor %}
+        <div class="center-buttons_menu">
+            <a href="#" class="button">Кнопка 1</a>
+            <a href="#" class="button">Кнопка 2</a>
+            <a href="#" class="button">Кнопка 3</a>
+            <a href="#" class="button">Кнопка 4</a>
+            <a href="#" class="button">Кнопка 5</a>
+            <a href="#" class="button">Кнопка 6</a>
+            <a href="#" class="button">Кнопка 7</a>
+            <a href="#" class="button">Кнопка 8</a>
+            <a href="#" class="button">Кнопка 9</a>
+            <a href="#" class="button">Кнопка 10</a>
+            <a href="#" class="button">Кнопка 11</a>
+            <a href="#" class="button">Кнопка 12</a>
+        </div>
+    </div>
+</div>
         </div>
     </div>
 </div>

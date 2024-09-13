@@ -14,10 +14,10 @@ body {
     margin: 0 auto;
 }
 
-.center-container {
+/* Стили для кнопок */
+.top-buttons, .center-buttons, .center-buttons_menu{
     display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
+    flex-direction: column;
     align-items: center;
     margin-top: 20px;
 }
@@ -30,7 +30,7 @@ body {
     text-decoration: none;
     border-radius: 5px;
     transition: background-color 0.3s, transform 0.2s;
-    flex: 0 1 calc(16.66% - 10px);
+    width: 250px;
     box-sizing: border-box;
     filter: drop-shadow(0 0 5px rgba(255, 255, 255, 0.5)) drop-shadow(0 0 10px rgba(0, 0, 0, 0.5));
 }
@@ -41,32 +41,9 @@ body {
     transform: scale(1.05);
 }
 
-.main-image {
-    max-width: 100%;
-    height: auto;
-}
-
-/* Стиль для вертикального размещения верхних кнопок */
-.top-buttons {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    margin-bottom: 20px;
-}
-
-.top-buttons .button {
-    flex: none;
-    width: 80%; /* ширина кнопок сверху */
-    margin: 10px 0; /* отступы между кнопками */
-}
-
+/* Адаптивность для мобильных устройств */
 @media (max-width: 600px) {
     .button {
-        padding: 8px 15px;
-        flex: 0 1 calc(50% - 10px);
-    }
-    
-    .top-buttons .button {
-        width: 90%; /* адаптация ширины кнопок для мобильных устройств */
+        width: 100%;
     }
 }
