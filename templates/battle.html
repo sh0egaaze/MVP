@@ -7,12 +7,12 @@
 {% block body %}
 <div class="battle">
     <div class="hero-left">
-        <img src="path_to_left_hero_image" alt="Герой слева">
+        <img src="{{ url_for('static', filename='css/1.png') }} alt="Герой слева">
         <p>{{ hero1_name }}: Здоровье - {{ hero1_health }}</p>
     </div>
 
     <div class="hero-right">
-        <img src="path_to_right_hero_image" alt="Герой справа">
+        <img src="{{ url_for('static', filename='css/2.png') }} alt="Герой справа">
         <p>{{ hero2_name }}: Здоровье - {{ hero2_health }}</p>
     </div>
 
