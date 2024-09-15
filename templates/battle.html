@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Бой</title>
+    <style>
+        body {
+            background-color: #7b08ff;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            font-family: Arial, sans-serif;
+            flex-direction: column;
+        }
+
+        .battle-container {
+            display: flex;
+            justify-content: space-between;
+            width: 80%;
+            max-width: 600px;
+        }
+
+        .player {
+            text-align: center;
+            width: 30%;
+        }
+
+        .player img {
+            width: 100%;
+            height: auto;
+        }
+
+        .actions {
+            display: flex;
+            justify-content: center;
+            margin-top: 20px;
+        }
+
+        .fight-button {
+            background-color: #fff;
+            color: #000;
+            padding: 10px 20px;
+            border: 2px solid #000;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .fight-button:hover {
+            background-color: #000;
+            color: #fff;
+        }
+
+        /* Консоль для логов боя */
+        .log-container {
+            width: 80%;
+            max-width: 600px;
+            height: 150px;
+            background-color: #333;
+            color: #00ff00;
+            padding: 10px;
+            margin-top: 20px;
+            border-radius: 5px;
+            overflow-y: auto; /* Вертикальная прокрутка */
+            font-family: monospace; /* Шрифт как в консоли */
+            border: 2px solid #fff;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+        }
+
+        /* Прокрутка */
+        .log-container::-webkit-scrollbar {
+            width: 6px;
+        }
+
+        .log-container::-webkit-scrollbar-thumb {
+            background-color: #555;
+            border-radius: 5px;
+        }
+
+        .log-container::-webkit-scrollbar-track {
+            background-color: #222;
+        }
+
+        .log-container p {
+            margin: 5px 0;
+        }
+
+        @media (max-width: 768px) {
+            .battle-container {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .player {
+                width: 80%;
+                margin-bottom: 20px;
+            }
+
+            .log-container {
+                width: 90%;
+                height: 200px;
+            }
+
+            .fight-button {
+                width: 80%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="battle-container">
+        <div class="player" id="player1">
+            <img src="player1.jpg" alt="Игрок 1">
+            <h2>Игрок 1</h2>
+            <p>Здоровье: <span id="health1">100</span></p>
+            <p>Выносливость: <span id="stamina1">100</span></p>
+        </div>
+        <div class="player" id="player2">
+            <img src="player2.jpg" alt="Игрок 2">
+            <h2>Игрок 2</h2>
+            <p>Здоровье: <span id="health2">100</span></p>
+            <p>Выносливость: <span id="stamina2">100</span></p>
+        </div>
+    </div>
+    <div class="actions">
+        <button class="fight-button" id="fightBtn">Бой</button>
+    </div>
+    <div class="log-container" id="log"></div>
+
+    <script>
+        // Определяем класс игрока
+        class Player {
+            constructor(name) {
+                this.name = name;
+                this.health = 100;
+                this.stamina = 100;
+                this.maxStamina = 100;
+            }
+
+            attack() {
+                if (this.stamina > 0) {
+                    let damage = Math.floor(Math.random() * 11) + 5; // Урон от 5 до 15
+                    this.stamina -= 10;
+                    return damage;
+                }
+                return 0;
+            }
+
+            recover() {
+                this.stamina = Math.min(this.stamina + 20, this.maxStamina);
+            }
+
+            isAlive() {
+                return this.health > 0;
+            }
+
+            takeDamage(damage) {
+                this.health -= damage;
+                if (this.health < 0) this.health = 0;
+            }
+        }
+
+        // Инициализация игроков
+        const player1 = new Player("Игрок 1");
+        const player2 = new Player("Игрок 2");
+
+        // Функция обновления интерфейса
+        function updateUI() {
+            document.getElementById('health1').innerText = player1.health;
+            document.getElementById('stamina1').innerText = player1.stamina;
+            document.getElementById('health2').innerText = player2.health;
+            document.getElementById('stamina2').innerText = player2.stamina;
+        }
+
+        // Функция для ведения лога боя
+        function logAction(action) {
+            const logDiv = document.getElementById('log');
+            const logEntry = document.createElement('p');
+            logEntry.innerText = action;
+            logDiv.appendChild(logEntry);
+            logDiv.scrollTop = logDiv.scrollHeight; // Автоматическая прокрутка вниз
+        }
+
+        // Функция для размена ударами
+        function exchangeTurn() {
+            if (player1.isAlive() && player2.isAlive()) {
+                // Атака игрока 1
+                let damage1 = player1.attack();
+                player2.takeDamage(damage1);
+                logAction(`${player1.name} атакует и наносит ${damage1} урона!`);
+
+                // Атака игрока 2
+                let damage2 = player2.attack();
+                player1.takeDamage(damage2);
+                logAction(`${player2.name} атакует и наносит ${damage2} урона!`);
+
+                // Восстановление выносливости
+                player1.recover();
+                player2.recover();
+
+                updateUI();
+
+                // Проверка на победителя
+                if (!player1.isAlive()) {
+                    logAction(`${player2.name} победил!`);
+                } else if (!player2.isAlive()) {
+                    logAction(`${player1.name} победил!`);
+                }
+            }
+        }
+
+        // Обработка нажатия на кнопку "Бой"
+        document.getElementById('fightBtn').addEventListener('click', () => {
+            const fightInterval = setInterval(() => {
+                if (player1.isAlive() && player2.isAlive()) {
+                    exchangeTurn();
+                } else {
+                    clearInterval(fightInterval); // Останавливаем бой, если кто-то проиграл
+                }
+            }, 1000); // Таймер на 1 секунду между ударами
+        });
+    </script>
+</body>
+</html>

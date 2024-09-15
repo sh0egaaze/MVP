@@ -67,5 +67,10 @@ def character():
 def inventory():
     return render_template('inventory.html')
 
+@app.route('/battle')
+def battle():
+    return render_template('battle.html')
+
+
 if __name__ == '__main__':
     app.run(debug=True)
