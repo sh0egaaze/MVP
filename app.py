@@ -59,5 +59,9 @@ def link12():
 def arena():
     return render_template('arena.html')
 
+@app.route('/character')
+def character():
+    return render_template('character.html')
+
 if __name__ == '__main__':
     app.run(debug=True)
