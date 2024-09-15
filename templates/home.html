@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Дом
+{% endblock %}
+
+{% block body %}
+<div class="home">
+    <h1>Дом</h1>
+    <p>Дом - отдельная локация для склада предметов игрока, небольшого производства и дополнительных усилений.</p>
+    <div class="submenus">
+        <a href="{{ url_for('warehouse') }}" class="button">Склад</a>
+        <a href="{{ url_for('training_room') }}" class="button">Тренировочная комната</a>
+        <a href="{{ url_for('workshop') }}" class="button">Мастерская</a>
+        <a href="{{ url_for('laboratory') }}" class="button">Лаборатория</a>
+        <a href="{{ url_for('medical_room') }}" class="button">Медицинский кабинет</a>
+    </div>
+</div>
+{% endblock %}

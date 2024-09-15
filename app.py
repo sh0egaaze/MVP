@@ -71,6 +71,25 @@ def inventory():
 def battle():
     return render_template('battle.html')
 
+@app.route('/warehouse')
+def warehouse():
+    return render_template('warehouse.html')
+
+@app.route('/training_room')
+def training_room():
+    return render_template('training_room.html')
+
+@app.route('/workshop')
+def workshop():
+    return render_template('workshop.html')
+
+@app.route('/laboratory')
+def laboratory():
+    return render_template('laboratory.html')
+
+@app.route('/medical_room')
+def medical_room():
+    return render_template('medical_room.html')
 
 if __name__ == '__main__':
     app.run(debug=True)
