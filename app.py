@@ -1,33 +1,6 @@
-from flask import Flask, render_template, request
-from models import Character, Skill, Battle
-
-
-
-
-hero1 = Character("Игрок 1", health=100, stamina=50, energy=50)
-hero2 = Character("Игрок 2", health=100, stamina=50, energy=50)
+from flask import Flask, render_template
 
 app = Flask(__name__)
-
-battle = Battle(hero1, hero2)
-
-@app.route('/battle', methods=['GET', 'POST'])
-def battle_view():
-    # Обработка хода
-    if request.method == 'POST':
-        # Получаем выбранный навык (например, "Мощный удар")
-        player_skill = request.form.get('skill')
-
-        # Производим обмен ударами, используя навык игрока 1
-        result_p1, result_p2 = battle.exchange_turn(player_skill, "Мощный удар")  # Игрок 2 всегда использует "Мощный удар"
-
-        # Проверяем, закончилась ли битва
-        battle_result = battle.is_battle_over()
-
-        return render_template('battle.html', result_p1=result_p1, result_p2=result_p2, battle_result=battle_result)
-
-    # Отображаем страницу боя
-    return render_template('battle.html')
 
 @app.route("/")
 @app.route("/index")
