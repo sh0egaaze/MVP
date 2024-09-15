@@ -63,5 +63,9 @@ def arena():
 def character():
     return render_template('character.html')
 
+@app.route('/inventory')
+def inventory():
+    return render_template('inventory.html')
+
 if __name__ == '__main__':
     app.run(debug=True)

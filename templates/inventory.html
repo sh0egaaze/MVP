@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Инвентарь
+{% endblock %}
+
+{% block body %}
+<div class="inventory-section">
+    <h1>Инвентарь</h1>
+    <p>Через меню инвентаря игрок может посмотреть, какие вещи у него в наличии, а также экипировать возможные предметы на персонажа.</p>
+    <div class="inventory-content">
+        <h2>Ваши предметы:</h2>
+        <!-- Пример списка предметов -->
+        <ul class="item-list">
+            <li>Меч - <a href="#" class="button">Экипировать</a></li>
+            <li>Щит - <a href="#" class="button">Экипировать</a></li>
+            <li>Шлем - <a href="#" class="button">Экипировать</a></li>
+            <!-- Добавьте больше предметов по мере необходимости -->
+        </ul>
+    </div>
+</div>
+{% endblock %}
