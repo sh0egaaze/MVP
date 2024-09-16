@@ -223,6 +223,70 @@
                 }
             }, 1000); // Таймер на 1 секунду между ударами
         });
+
+        // Определяем класс для управления приемами
+        class Skill {
+            constructor(name, energyCost, requiredStat) {
+                this.name = name;
+                this.energyCost = energyCost;
+                this.requiredStat = requiredStat;
+            }
+
+            useSkill(player) {
+                if (player[this.requiredStat] >= this.energyCost && player.stamina >= this.energyCost) {
+                    player[this.requiredStat] -= this.energyCost;
+                    player.stamina -= this.energyCost;
+                    return `Использован ${this.name}.`;
+                } else {
+                    return `Недостаточно энергии или выносливости для использования ${this.name}.`;
+                }
+            }
+        }
+
+        // Примеры приемов
+        const powerfulStrike = new Skill("Мощный удар", 20, "strength");
+        const dodge = new Skill("Уворот", 15, "speed");
+
+        // Инициализация игрока
+        const player = {
+            stamina: 100,
+            strength: 100,
+            accuracy: 100,
+            speed: 100,
+            constitution: 100
+        };
+
+        // Обработка нажатий на кнопки
+        document.querySelectorAll('.skills-content .button').forEach(button => {
+            button.addEventListener('click', () => {
+                const skillName = button.previousSibling.textContent.trim();
+                let result;
+
+                switch (skillName) {
+                    case 'Мощный удар':
+                        result = powerfulStrike.useSkill(player);
+                        break;
+                    case 'Уворот':
+                        result = dodge.useSkill(player);
+                        break;
+                    // Добавьте обработку для других приемов
+                    default:
+                        result = 'Неизвестный прием.';
+                }
+
+                alert(result);
+                updateEnergyUI();
+            });
+        });
+
+        // Обновление отображения энергии
+        function updateEnergyUI() {
+            document.getElementById('stamina-energy').innerText = player.stamina;
+            document.getElementById('strength-energy').innerText = player.strength;
+            document.getElementById('accuracy-energy').innerText = player.accuracy;
+            document.getElementById('speed-energy').innerText = player.speed;
+            document.getElementById('constitution-energy').innerText = player.constitution;
+        }
     </script>
 </body>
 </html>

@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Приемы
+{% endblock %}
+
+{% block body %}
+<div class="skills-section">
+    <h1>Приемы</h1>
+    <p>Здесь можно изучить и использовать приемы в бою. Для каждого приема необходима энергия профильных характеристик.</p>
+
+    <div class="skills-content">
+        <h2>Доступные приемы:</h2>
+        <ul class="center-buttons">
+            <!-- Пример приемов -->
+            <li>Мощный удар - <a href="#" class="button">Использовать</a></li>
+            <li>Уворот - <a href="#" class="button">Использовать</a></li>
+            <li>Прием для дальнего оружия - <a href="#" class="button">Использовать</a></li>
+            <li>Защитный блок - <a href="#" class="button">Использовать</a></li>
+            <!-- Добавьте больше приемов по мере необходимости -->
+        </ul>
+    </div>
+
+    <h2>Энергия характеристик:</h2>
+    <p>Выносливость: <span id="stamina-energy">100</span></p>
+    <p>Сила: <span id="strength-energy">100</span></p>
+    <p>Меткость: <span id="accuracy-energy">100</span></p>
+    <p>Скорость: <span id="speed-energy">100</span></p>
+    <p>Конституция: <span id="constitution-energy">100</span></p>
+</div>
+{% endblock %}

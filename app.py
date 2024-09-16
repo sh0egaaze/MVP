@@ -95,6 +95,10 @@ def laboratory():
 def medical_room():
     return render_template('medical_room.html')
 
+@app.route('/skills')
+def skills():
+    return render_template('skills.html')
+
 
 if __name__ == '__main__':
     app.run(debug=True)
