@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ru">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -39,7 +39,7 @@
             margin-top: 20px;
         }
 
-        .fight-button {
+        .attack-button {
             background-color: #fff;
             color: #000;
             padding: 10px 20px;
@@ -47,15 +47,15 @@
             border-radius: 5px;
             font-size: 16px;
             cursor: pointer;
+            margin: 0 10px;
             transition: 0.3s;
         }
 
-        .fight-button:hover {
+        .attack-button:hover {
             background-color: #000;
             color: #fff;
         }
 
-        /* Консоль для логов боя */
         .log-container {
             width: 80%;
             max-width: 600px;
@@ -65,24 +65,10 @@
             padding: 10px;
             margin-top: 20px;
             border-radius: 5px;
-            overflow-y: auto; /* Вертикальная прокрутка */
-            font-family: monospace; /* Шрифт как в консоли */
+            overflow-y: auto;
+            font-family: monospace;
             border: 2px solid #fff;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
-        }
-
-        /* Прокрутка */
-        .log-container::-webkit-scrollbar {
-            width: 6px;
-        }
-
-        .log-container::-webkit-scrollbar-thumb {
-            background-color: #555;
-            border-radius: 5px;
-        }
-
-        .log-container::-webkit-scrollbar-track {
-            background-color: #222;
         }
 
         .log-container p {
@@ -105,7 +91,7 @@
                 height: 200px;
             }
 
-            .fight-button {
+            .attack-button {
                 width: 80%;
             }
         }
@@ -127,12 +113,12 @@
         </div>
     </div>
     <div class="actions">
-        <button class="fight-button" id="fightBtn">Бой</button>
+        <button class="attack-button" id="handAttack">Удар рукой</button>
+        <button class="attack-button" id="legAttack">Удар ногой</button>
     </div>
     <div class="log-container" id="log"></div>
 
     <script>
-        // Определяем класс игрока
         class Player {
             constructor(name) {
                 this.name = name;
@@ -141,9 +127,9 @@
                 this.maxStamina = 100;
             }
 
-            attack() {
+            attack(damageRange) {
                 if (this.stamina > 0) {
-                    let damage = Math.floor(Math.random() * 11) + 5; // Урон от 5 до 15
+                    let damage = Math.floor(Math.random() * (damageRange.max - damageRange.min + 1)) + damageRange.min;
                     this.stamina -= 10;
                     return damage;
                 }
@@ -164,11 +150,9 @@
             }
         }
 
-        // Инициализация игроков
         const player1 = new Player("Игрок 1");
         const player2 = new Player("Игрок 2");
 
-        // Функция обновления интерфейса
         function updateUI() {
             document.getElementById('health1').innerText = player1.health;
             document.getElementById('stamina1').innerText = player1.stamina;
@@ -176,35 +160,34 @@
             document.getElementById('stamina2').innerText = player2.stamina;
         }
 
-        // Функция для ведения лога боя
         function logAction(action) {
             const logDiv = document.getElementById('log');
             const logEntry = document.createElement('p');
             logEntry.innerText = action;
             logDiv.appendChild(logEntry);
-            logDiv.scrollTop = logDiv.scrollHeight; // Автоматическая прокрутка вниз
+            logDiv.scrollTop = logDiv.scrollHeight;
         }
 
-        // Функция для размена ударами
-        function exchangeTurn() {
+        function playerTurn(attackType) {
             if (player1.isAlive() && player2.isAlive()) {
+                let damageRange = attackType === 'hand' ? { min: 5, max: 10 } : { min: 10, max: 20 };
+
                 // Атака игрока 1
-                let damage1 = player1.attack();
+                let damage1 = player1.attack(damageRange);
                 player2.takeDamage(damage1);
-                logAction(`${player1.name} атакует и наносит ${damage1} урона!`);
+                logAction(`${player1.name} наносит удар ${attackType === 'hand' ? 'рукой' : 'ногой'} и наносит ${damage1} урона!`);
 
-                // Атака игрока 2
-                let damage2 = player2.attack();
-                player1.takeDamage(damage2);
-                logAction(`${player2.name} атакует и наносит ${damage2} урона!`);
+                if (player2.isAlive()) {
+                    // Атака игрока 2
+                    let damage2 = player2.attack({ min: 5, max: 15 });
+                    player1.takeDamage(damage2);
+                    logAction(`${player2.name} отвечает и наносит ${damage2} урона!`);
+                }
 
-                // Восстановление выносливости
                 player1.recover();
                 player2.recover();
-
                 updateUI();
 
-                // Проверка на победителя
                 if (!player1.isAlive()) {
                     logAction(`${player2.name} победил!`);
                 } else if (!player2.isAlive()) {
@@ -213,80 +196,8 @@
             }
         }
 
-        // Обработка нажатия на кнопку "Бой"
-        document.getElementById('fightBtn').addEventListener('click', () => {
-            const fightInterval = setInterval(() => {
-                if (player1.isAlive() && player2.isAlive()) {
-                    exchangeTurn();
-                } else {
-                    clearInterval(fightInterval); // Останавливаем бой, если кто-то проиграл
-                }
-            }, 1000); // Таймер на 1 секунду между ударами
-        });
-
-        // Определяем класс для управления приемами
-        class Skill {
-            constructor(name, energyCost, requiredStat) {
-                this.name = name;
-                this.energyCost = energyCost;
-                this.requiredStat = requiredStat;
-            }
-
-            useSkill(player) {
-                if (player[this.requiredStat] >= this.energyCost && player.stamina >= this.energyCost) {
-                    player[this.requiredStat] -= this.energyCost;
-                    player.stamina -= this.energyCost;
-                    return `Использован ${this.name}.`;
-                } else {
-                    return `Недостаточно энергии или выносливости для использования ${this.name}.`;
-                }
-            }
-        }
-
-        // Примеры приемов
-        const powerfulStrike = new Skill("Мощный удар", 20, "strength");
-        const dodge = new Skill("Уворот", 15, "speed");
-
-        // Инициализация игрока
-        const player = {
-            stamina: 100,
-            strength: 100,
-            accuracy: 100,
-            speed: 100,
-            constitution: 100
-        };
-
-        // Обработка нажатий на кнопки
-        document.querySelectorAll('.skills-content .button').forEach(button => {
-            button.addEventListener('click', () => {
-                const skillName = button.previousSibling.textContent.trim();
-                let result;
-
-                switch (skillName) {
-                    case 'Мощный удар':
-                        result = powerfulStrike.useSkill(player);
-                        break;
-                    case 'Уворот':
-                        result = dodge.useSkill(player);
-                        break;
-                    // Добавьте обработку для других приемов
-                    default:
-                        result = 'Неизвестный прием.';
-                }
-
-                alert(result);
-                updateEnergyUI();
-            });
-        });
-
-        // Обновление отображения энергии
-        function updateEnergyUI() {
-            document.getElementById('stamina-energy').innerText = player.stamina;
-            document.getElementById('strength-energy').innerText = player.strength;
-            document.getElementById('accuracy-energy').innerText = player.accuracy;
-            document.getElementById('speed-energy').innerText = player.speed;
-            document.getElementById('constitution-energy').innerText = player.constitution;
-        }
+        document.getElementById('handAttack').addEventListener('click', () => playerTurn('hand'));
+        document.getElementById('legAttack').addEventListener('click', () => playerTurn('leg'));
     </script>
 </body>
 </html>
