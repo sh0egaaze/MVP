@@ -93,6 +93,7 @@
 
             .attack-button {
                 width: 80%;
+                margin-bottom: 10px; 
             }
         }
     </style>
@@ -113,91 +114,163 @@
         </div>
     </div>
     <div class="actions">
+        
         <button class="attack-button" id="handAttack">Удар рукой</button>
         <button class="attack-button" id="legAttack">Удар ногой</button>
+        <button class="attack-button" id="lightWeaponAttack">Выстрел из легкого оружия</button>
+        <button class="attack-button" id="mediumWeaponAttack">Выстрел из среднего оружия</button>
+        <button class="attack-button" id="heavyWeaponAttack">Выстрел из тяжелого оружия</button> 
+        <button class="attack-button" id="coldWeaponAttack">Атака холодным оружием</button> 
     </div>
     <div class="log-container" id="log"></div>
 
     <script>
-        class Player {
-            constructor(name) {
-                this.name = name;
-                this.health = 100;
-                this.stamina = 100;
-                this.maxStamina = 100;
-            }
+      class Skill {
+          constructor(name) {
+              this.name = name; 
+              this.level = Math.floor(Math.random() * (5 - 1 + 1)) + 1; 
+          }
+          
+          getDamageBonus() {
+              return this.level; 
+          }
+          
+          getHitChanceBonus() {
+              return this.level * 5; 
+          }
+      }
 
-            attack(damageRange) {
-                if (this.stamina > 0) {
-                    let damage = Math.floor(Math.random() * (damageRange.max - damageRange.min + 1)) + damageRange.min;
-                    this.stamina -= 10;
-                    return damage;
-                }
-                return 0;
-            }
+      class Player {
+          constructor(name) {
+              this.name = name; 
+              this.health = 100; 
+              this.stamina = 100; 
+              this.maxStamina = 100;
 
-            recover() {
-                this.stamina = Math.min(this.stamina + 20, this.maxStamina);
-            }
+              // Добавляем навыки
+              this.skills = [
+                  new Skill("Рукопашный бой"),
+                  new Skill("Холодное оружие"),
+                  new Skill("Легкое стрелковое оружие"),
+                  new Skill("Среднее стрелковое оружие"),
+                  new Skill("Тяжелое стрелковое оружие")
+              ];
+          }
 
-            isAlive() {
-                return this.health > 0;
-            }
+          attack(damageRange) {
+              if (this.stamina > 0) {
+                  let damage = Math.floor(Math.random() * (damageRange.max - damageRange.min + 1)) + damageRange.min;
 
-            takeDamage(damage) {
-                this.health -= damage;
-                if (this.health < 0) this.health = 0;
-            }
-        }
+                  
+                  damage += this.skills[0].getDamageBonus(); 
+                  
+                  this.stamina -= 10;
 
-        const player1 = new Player("Игрок 1");
-        const player2 = new Player("Игрок 2");
+                  return damage; 
+              }
+              return 0; 
+          }
 
-        function updateUI() {
-            document.getElementById('health1').innerText = player1.health;
-            document.getElementById('stamina1').innerText = player1.stamina;
-            document.getElementById('health2').innerText = player2.health;
-            document.getElementById('stamina2').innerText = player2.stamina;
-        }
+          recover() {
+              this.stamina = Math.min(this.stamina + 20, this.maxStamina);
+          }
 
-        function logAction(action) {
-            const logDiv = document.getElementById('log');
-            const logEntry = document.createElement('p');
-            logEntry.innerText = action;
-            logDiv.appendChild(logEntry);
-            logDiv.scrollTop = logDiv.scrollHeight;
-        }
+          isAlive() { 
+              return this.health > 0; 
+          }
 
-        function playerTurn(attackType) {
-            if (player1.isAlive() && player2.isAlive()) {
-                let damageRange = attackType === 'hand' ? { min: 5, max: 10 } : { min: 10, max: 20 };
+          takeDamage(damage) { 
+              this.health -= damage; 
+              if (this.health < 0) this.health = 0; 
+          }
+      }
 
-                // Атака игрока 1
-                let damage1 = player1.attack(damageRange);
-                player2.takeDamage(damage1);
-                logAction(`${player1.name} наносит удар ${attackType === 'hand' ? 'рукой' : 'ногой'} и наносит ${damage1} урона!`);
+      const player1 = new Player("Игрок 1");
+      const player2 = new Player("Игрок 2");
 
-                if (player2.isAlive()) {
-                    // Атака игрока 2
-                    let damage2 = player2.attack({ min: 5, max: 15 });
-                    player1.takeDamage(damage2);
-                    logAction(`${player2.name} отвечает и наносит ${damage2} урона!`);
-                }
+      function updateUI() { 
+          document.getElementById('health1').innerText = player1.health; 
+          document.getElementById('stamina1').innerText = player1.stamina; 
+          document.getElementById('health2').innerText = player2.health; 
+          document.getElementById('stamina2').innerText = player2.stamina; 
+      }
 
-                player1.recover();
-                player2.recover();
-                updateUI();
+      function logAction(action) { 
+          const logDiv = document.getElementById('log'); 
+          const logEntry = document.createElement('p'); 
+          logEntry.innerText = action; 
+          logDiv.appendChild(logEntry); 
+          logDiv.scrollTop = logDiv.scrollHeight; 
+      }
 
-                if (!player1.isAlive()) {
-                    logAction(`${player2.name} победил!`);
-                } else if (!player2.isAlive()) {
-                    logAction(`${player1.name} победил!`);
-                }
-            }
-        }
+      function playerTurn(attackType) { 
+          if (player1.isAlive() && player2.isAlive()) { 
 
-        document.getElementById('handAttack').addEventListener('click', () => playerTurn('hand'));
-        document.getElementById('legAttack').addEventListener('click', () => playerTurn('leg'));
+              let damageRange;
+
+              switch (attackType) {
+                  case 'hand':
+                      damageRange = { min: 5, max: 10 };
+                      break;
+
+                  case 'leg':
+                      damageRange = { min :10, max :15 };
+                      break;
+
+                  case 'lightWeapon':
+                      damageRange = { min :8, max :12 }; 
+                      break;
+
+                  case 'mediumWeapon':
+                      damageRange = { min :15, max :25 }; 
+                      break;
+
+                  case 'heavyWeapon':
+                      damageRange = { min :20, max :30 }; 
+                      break;
+
+                  case 'coldWeapon':
+                      damageRange = { min :12, max :18 }; 
+                      break;
+
+                  default:
+                      damageRange = { min :5, max :10 }; 
+                      break;
+              }
+
+              
+              let damage1 = player1.attack(damageRange); 
+              player2.takeDamage(damage1); 
+              logAction(`${player1.name} наносит удар ${attackType === 'hand' ? 'рукой' : attackType === 'leg' ? 'ногой' : attackType === 'lightWeapon' ? 'из легкого оружия' : attackType === 'mediumWeapon' ? 'из среднего оружия' : attackType === 'heavyWeapon' ? 'из тяжелого оружия' : 'холодным оружием'} и наносит ${damage1} урона!`);
+
+              if (player2.isAlive()) { 
+
+                  
+                  let damage2 = player2.attack({ min :5, max :15 }); 
+                  player1.takeDamage(damage2); 
+                  logAction(`${player2.name} отвечает и наносит ${damage2} урона!`); 
+              } 
+
+              player1.recover(); 
+              player2.recover(); 
+              updateUI(); 
+
+              if (!player1.isAlive()) { 
+                  logAction(`${player2.name} победил!`); 
+              } else if (!player2.isAlive()) { 
+                  logAction(`${player1.name} победил!`); 
+              } 
+          } 
+      } 
+
+      document.getElementById('handAttack').addEventListener('click', () => playerTurn('hand')); 
+      document.getElementById('legAttack').addEventListener('click', () => playerTurn('leg')); 
+      document.getElementById('lightWeaponAttack').addEventListener('click', () => playerTurn('lightWeapon')); 
+      document.getElementById('mediumWeaponAttack').addEventListener('click', () => playerTurn('mediumWeapon')); 
+      document.getElementById('heavyWeaponAttack').addEventListener('click', () => playerTurn('heavyWeapon')); // Обработчик для тяжелого оружия
+      document.getElementById('coldWeaponAttack').addEventListener('click', () => playerTurn('coldWeapon')); // Обработчик для холодного оружия
+
+      updateUI(); 
     </script>
 </body>
 </html>
