@@ -1,0 +1,219 @@
+{
+    "1808263": {
+        "id": 1808263,
+        "nickname": "qwe",
+        "level": 1,
+        "current_experience": 0,
+        "required_experience": 100,
+        "credits": 500,
+        "strength": 1,
+        "accuracy": 1,
+        "skills": {
+            "melee": {
+                "level": 1,
+                "experience": 0,
+                "required_experience": 100
+            },
+            "cold_weapon": {
+                "level": 1,
+                "experience": 0,
+                "required_experience": 100
+            },
+            "ranged_weapon": {
+                "level": 1,
+                "experience": 0,
+                "required_experience": 100
+            }
+        },
+        "abilities": {
+            "power_strike": 1,
+            "dodge": 1
+        }
+    },
+    "4227341": {
+        "id": 4227341,
+        "nickname": "qwe",
+        "level": 1,
+        "current_experience": 0,
+        "required_experience": 100,
+        "credits": 500,
+        "strength": 1,
+        "accuracy": 1,
+        "skills": {
+            "melee": {
+                "level": 1,
+                "experience": 0,
+                "required_experience": 100
+            },
+            "cold_weapon": {
+                "level": 1,
+                "experience": 0,
+                "required_experience": 100
+            },
+            "ranged_weapon": {
+                "level": 1,
+                "experience": 0,
+                "required_experience": 100
+            }
+        },
+        "abilities": {
+            "power_strike": 1,
+            "dodge": 1
+        }
+    },
+    "5314967": {
+        "id": 5314967,
+        "nickname": "qwe",
+        "level": 1,
+        "current_experience": 0,
+        "required_experience": 100,
+        "credits": 400,
+        "strength": 2,
+        "accuracy": 1,
+        "skills": {
+            "melee": {
+                "level": 1,
+                "experience": 0,
+                "required_experience": 100
+            },
+            "cold_weapon": {
+                "level": 1,
+                "experience": 0,
+                "required_experience": 100
+            },
+            "ranged_weapon": {
+                "level": 1,
+                "experience": 0,
+                "required_experience": 100
+            }
+        },
+        "abilities": {
+            "power_strike": 1,
+            "dodge": 1
+        }
+    },
+    "1575482": {
+        "id": 1575482,
+        "nickname": "qwe",
+        "level": 1,
+        "current_experience": 0,
+        "required_experience": 100,
+        "credits": 350,
+        "strength": 2,
+        "accuracy": 1,
+        "skills": {
+            "melee": {
+                "level": 1,
+                "experience": 50,
+                "required_experience": 100
+            },
+            "cold_weapon": {
+                "level": 1,
+                "experience": 0,
+                "required_experience": 100
+            },
+            "ranged_weapon": {
+                "level": 1,
+                "experience": 0,
+                "required_experience": 100
+            }
+        },
+        "abilities": {
+            "power_strike": 1,
+            "dodge": 1
+        }
+    },
+    "1932336": {
+        "id": 1932336,
+        "nickname": "qwe",
+        "level": 1,
+        "current_experience": 0,
+        "required_experience": 100,
+        "credits": 500,
+        "strength": 1,
+        "accuracy": 1,
+        "skills": {
+            "melee": {
+                "level": 1,
+                "experience": 0,
+                "required_experience": 100
+            },
+            "cold_weapon": {
+                "level": 1,
+                "experience": 0,
+                "required_experience": 100
+            },
+            "ranged_weapon": {
+                "level": 1,
+                "experience": 0,
+                "required_experience": 100
+            }
+        },
+        "abilities": {
+            "power_strike": 1,
+            "dodge": 1
+        }
+    },
+    "8574565": {
+        "id": 8574565,
+        "nickname": "qwe",
+        "level": 1,
+        "current_experience": 0,
+        "required_experience": 100,
+        "credits": 50,
+        "strength": 2,
+        "accuracy": 2,
+        "skills": {
+            "melee": {
+                "level": 1,
+                "experience": 50,
+                "required_experience": 100
+            },
+            "cold_weapon": {
+                "level": 1,
+                "experience": 50,
+                "required_experience": 100
+            },
+            "ranged_weapon": {
+                "level": 1,
+                "experience": 0,
+                "required_experience": 100
+            }
+        },
+        "abilities": {
+            "power_strike": 2,
+            "dodge": 1
+        }
+    },
+    "9958855": {
+        "id": 9958855,
+        "nickname": "qqq",
+        "level": 1,
+        "current_experience": 0,
+        "required_experience": 100,
+        "credits": 0,
+        "strength": 1,
+        "accuracy": 1,
+        "skills": {
+            "melee": {
+                "level": 4,
+                "experience": 25,
+                "required_experience": 337
+            },
+            "cold_weapon": {
+                "level": 1,
+                "experience": 0,
+                "required_experience": 100
+            },
+            "ranged_weapon": {
+                "level": 1,
+                "experience": 0,
+                "required_experience": 100
+            }
+        },
+        "abilities": {
+            "power_strike": 1,
+            "dodge": 1
+        }
+    }
+}

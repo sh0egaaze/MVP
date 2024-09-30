@@ -5,15 +5,270 @@ body {
     padding: 0;
 }
 
+
+.attributes-section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    text-align: center;
+    padding: 20px;
+    background-color: #fff;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    margin: 20px auto;
+    max-width: 600px;
+}
+
+.attributes-section h1 {
+    font-size: 2.5em;
+    color: #333;
+    margin-bottom: 20px;
+}
+
+.credits {
+    font-size: 1.2em;
+    margin-bottom: 20px;
+}
+
+.attributes-content h2 {
+    font-size: 1.8em;
+    margin-bottom: 20px;
+    color: #444;
+}
+
+.attribute-list {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+
+.attribute-list li {
+    margin-bottom: 15px;
+    font-size: 1.2em;
+}
+
+form {
+    display: inline-block;
+}
+
+.upgrade-button {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    margin-top: 10px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s;
+}
+
+.upgrade-button:hover {
+    background-color: #0056b3;
+    transform: scale(1.05);
+}
+
+.button {
+    display: inline-block;
+    background-color: #6c757d;
+    color: white;
+    padding: 10px 20px;
+    border-radius: 5px;
+    text-decoration: none;
+    transition: background-color 0.3s ease, transform 0.2s;
+    margin-top: 20px;
+}
+
+.button:hover {
+    background-color: #5a6268;
+    transform: scale(1.05);
+}
+
+.navigation {
+    margin-top: 30px;
+}
+
+.abilities-section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    text-align: center;
+    padding: 20px;
+    background-color: #fff;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    margin: 20px auto;
+    max-width: 600px;
+}
+
+.abilities-section h1 {
+    font-size: 2.5em;
+    color: #333;
+    margin-bottom: 20px;
+}
+
+.credits {
+    font-size: 1.2em;
+    margin-bottom: 20px;
+}
+
+.abilities-content h2 {
+    font-size: 1.8em;
+    margin-bottom: 20px;
+    color: #444;
+}
+
+.attribute-list {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+
+.attribute-list li {
+    margin-bottom: 15px;
+    font-size: 1.2em;
+}
+
+form {
+    display: inline-block;
+}
+
+.upgrade-button {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    margin-top: 10px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s;
+}
+
+.upgrade-button:hover {
+    background-color: #0056b3;
+    transform: scale(1.05);
+}
+
+.button {
+    display: inline-block;
+    background-color: #6c757d;
+    color: white;
+    padding: 10px 20px;
+    border-radius: 5px;
+    text-decoration: none;
+    transition: background-color 0.3s ease, transform 0.2s;
+    margin-top: 20px;
+}
+
+.button:hover {
+    background-color: #5a6268;
+    transform: scale(1.05);
+}
+
+.navigation {
+    margin-top: 30px;
+}
+
+/* Стили для изображения персонажа */
+.character-image {
+    margin-bottom: 20px; /* Отступ снизу для изображения */
+}
+
+.main-image {
+    max-width: 100%; /* Устанавливает максимальную ширину изображения */
+    height: auto; /* Автоматическая высота для сохранения пропорций */
+    border-radius: 8px; /* Скругленные углы для изображения */
+}
+
+
+/* Registration Section Styles */
+.registration-section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh; /* Align vertically */
+    padding: 20px;
+}
+
+.registration-section h1 {
+    color: #ffffff;
+    margin-bottom: 20px;
+}
+
+.registration-section form {
+    background-color: #ffffff;
+    border-radius: 8px;
+    padding: 20px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    width: 100%;
+    max-width: 400px; /* Max width for larger screens */
+}
+
+.registration-section label {
+    font-size: 1.2em;
+    margin-bottom: 10px;
+    display: block;
+}
+
+.registration-section input[type="text"] {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+.registration-section input[type="submit"] {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 10px;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    width: 100%;
+}
+
+.registration-section input[type="submit"]:hover {
+    background-color: #0056b3;
+}
+
+/* Responsive Styles for Registration Section */
+@media (max-width: 600px) {
+    .registration-section {
+        padding: 10px;
+    }
+
+    .registration-section form {
+        padding: 15px;
+    }
+
+    .registration-section h1 {
+        font-size: 1.5em;
+    }
+
+    .registration-section input[type="text"],
+    .registration-section input[type="submit"] {
+        font-size: 1em;
+    }
+}
+
+/* About Section Styles */
 .about {
     padding: 20px;
     text-align: center;
 }
 
+/* Scroll Class */
 .scroll {
     margin: 0 auto;
 }
 
+/* Button Styles */
 .center-buttons, .top-buttons {
     display: flex;
     flex-wrap: wrap;
@@ -29,19 +284,140 @@ body {
     text-decoration: none;
     border-radius: 8px;
     transition: background-color 0.3s, transform 0.2s, box-shadow 0.3s;
-    box-sizing: border-box;
+    box-sizing: border-box; 
     filter: drop-shadow(0 0 4px rgba(0, 0, 0, 0.3));
 }
 
 .top-buttons .button {
-    flex: 0 1 250px;
+    flex: 0 1 250px; /* Flex basis for top buttons */
 }
 
 .center-buttons .button {
-    flex: 0 1 200px;
+    flex: 0 1 200px; /* Flex basis for center buttons */
 }
 
 .button:hover {
+    background: #f0f0f0; 
+    color: #000000; 
+    transform: scale(1.05);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+/* Responsive Styles for Buttons */
+@media (max-width: 600px) {
+    .center-buttons .button {
+        flex: 0 1 calc(50% - 10px); /* Responsive button size */
+    }
+}
+
+/* Main Image Styles */
+.main-image {
+    max-width: 35%;
+    height: auto; 
+    margin-top: 20px; 
+}
+
+/* Inventory Section Styles */
+.inventory-section {
+    padding: 20px; 
+    text-align: center; 
+}
+
+.inventory-section h1 {
+    font-size: 2em; 
+    margin-bottom: 10px; 
+}
+
+.inventory-section p {
+    font-size: 1.2em; 
+    margin-bottom: 20px; 
+}
+
+.inventory-content {
+    text-align: center; 
+}
+
+.item-list {
+    list-style-type: none; 
+    padding: 0; 
+    margin: 0; 
+}
+
+.item-list li {
+    margin: 10px; 
+    font-size: 1.2em; 
+}
+
+.item-list .button {
+    background: #007bff; /* Button color for inventory */
+}
+
+/* Character Section Styles */
+.character-section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+}
+
+.character-info {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.character-info h1 {
+    font-size: 2em;
+    margin-bottom: 10px;
+}
+
+.character-details {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    background-color: #ffffff;
+    border-radius: 8px;
+    padding: 20px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    max-width: 600px;
+}
+
+.character-image {
+    flex: 0 0 200px;
+    margin-right: 20px;
+}
+
+.character-stats {
+    flex: 1 1 auto;
+    text-align: left;
+}
+
+.character-stats p {
+    margin-bottom: 10px;
+}
+
+.center-buttons {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+.center-buttons .button {
+    background: #ffffff;
+    color: #000000;
+    padding: 10px 20px;
+    margin: 5px;
+    text-decoration: none;
+    border-radius: 8px;
+    transition: background-color 0.3s, transform 0.2s, box-shadow 0.3s;
+    box-sizing: border-box;
+    filter: drop-shadow(0 0 4px rgba(0, 0, 0, 0.3));
+    flex: 0 1 200px;
+}
+
+.center-buttons .button:hover {
     background: #f0f0f0;
     color: #000000;
     transform: scale(1.05);
@@ -49,48 +425,101 @@ body {
 }
 
 @media (max-width: 600px) {
+    .character-details {
+        flex-direction: column;
+        padding: 15px;
+    }
+
+    .character-image {
+        margin-right: 0;
+        margin-bottom: 10px;
+    }
+
+    .character-stats {
+        text-align: center;
+    }
+
     .center-buttons .button {
         flex: 0 1 calc(50% - 10px);
     }
 }
 
-.main-image {
-    max-width: 35%;
-    height: auto;
-    margin-top: 20px;
-}
-
-/* Стили для страницы инвентаря */
-.inventory-section {
-    padding: 20px;
-    text-align: center;
-}
-
-.inventory-section h1 {
-    font-size: 2em;
-    margin-bottom: 10px;
-}
-
-.inventory-section p {
-    font-size: 1.2em;
+/* Battle Styles */
+.battle-container {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    max-width: 600px;
     margin-bottom: 20px;
 }
 
-.inventory-content {
+.player {
+    background-color: #fff;
+    border: 2px solid #333;
+    border-radius: 10px;
+    padding: 15px;
     text-align: center;
+    width: 45%;
+    position: relative;
 }
 
-.item-list {
-    list-style-type: none;
-    padding: 0;
-    margin: 0;
+.player img {
+    width: 100%;
+    height: auto;
+    border-radius: 5px;
 }
 
-.item-list li {
-    margin: 10px 0;
-    font-size: 1.2em;
+.actions {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin-bottom: 20px;
 }
 
-.item-list .button {
-    background: #007bff; /* Цвет кнопки для инвентаря */
+.attack-button {
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    padding: 10px 15px;
+    margin: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
 }
+
+.attack-button:hover {
+    background-color: #45a049;
+}
+
+.log-container {
+    background-color: #fff;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 10px;
+    width: 100%;
+    max-height: 200px;
+    overflow-y: auto;
+}
+
+.blood-effect {
+    position: absolute;
+    width: 30px;
+    height: 30px;
+    background-color: red;
+    border-radius: 50%;
+    pointer-events: none;
+    animation: blood-splash 0.5s forwards;
+}
+
+@keyframes blood-splash {
+    0% {
+        transform: scale(1);
+        opacity: 1;
+    }
+    100% {
+        transform: scale(5);
+        opacity: 0;
+    }
+}
+
+

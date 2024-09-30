@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Приемы
+{% endblock %}
+
+{% block body %}
+<div class="abilities-section">
+    <h1>Приемы</h1>
+    
+    <!-- Блок с изображением персонажа -->
+    <div class="character-image">
+        <img src="{{ url_for('static', filename='css/character.png') }}" alt="Персонаж" class="main-image">
+    </div>
+
+    <p class="credits">Кредиты: {{ character.credits }}</p>
+    <p>Выберите прием для изучения:</p>
+    
+    <div class="abilities-content">
+        <h2>Приемы:</h2>
+        <ul class="attribute-list">
+            <li>Мощный удар (Уровень: {{ character.abilities['power_strike'] }}) 
+                <form action="{{ url_for('learn_ability', user_id=character.id, ability='power_strike') }}" method="POST">
+                    <input type="submit" value="Изучить" class="upgrade-button">
+                </form>
+            </li>
+            <li>Уворот (Уровень: {{ character.abilities['dodge'] }}) 
+                <form action="{{ url_for('learn_ability', user_id=character.id, ability='dodge') }}" method="POST">
+                    <input type="submit" value="Изучить" class="upgrade-button">
+                </form>
+            </li>
+            <!-- Добавьте другие приемы с отображением их уровня -->
+        </ul>
+    </div>
+
+    <!-- Ссылка для возврата в главное меню -->
+    <div class="navigation">
+        <a href="{{ url_for('main_menu', user_id=character.id) }}" class="button">Назад в главное меню</a>
+    </div>
+</div>
+{% endblock %}

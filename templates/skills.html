@@ -1,31 +1,43 @@
 {% extends 'base.html' %}
 
 {% block title %}
-Приемы
+Навыки
 {% endblock %}
 
 {% block body %}
-<div class="skills-section">
-    <h1>Приемы</h1>
-    <p>Здесь можно изучить и использовать приемы в бою. Для каждого приема необходима энергия профильных характеристик.</p>
+<div class="skills-section attributes-section">
+    <h1>Навыки</h1>
 
-    <div class="skills-content">
-        <h2>Доступные приемы:</h2>
-        <ul class="center-buttons">
-            <!-- Пример приемов -->
-            <li>Мощный удар - <a href="#" class="button">Использовать</a></li>
-            <li>Уворот - <a href="#" class="button">Использовать</a></li>
-            <li>Прием для дальнего оружия - <a href="#" class="button">Использовать</a></li>
-            <li>Защитный блок - <a href="#" class="button">Использовать</a></li>
-            <!-- Добавьте больше приемов по мере необходимости -->
+    <!-- Блок с изображением персонажа -->
+    <div class="character-image">
+        <img src="{{ url_for('static', filename='css/character.png') }}" alt="Персонаж" class="main-image">
+    </div>
+
+    <p class="credits">Кредиты: {{ character.credits }}</p>
+    <p>Выберите навык для улучшения:</p>
+    
+    <div class="skills-content attributes-content">
+        <h2>Навыки:</h2>
+        <ul class="skill-list attribute-list">
+            <li>Рукопашный бой - Уровень: {{ character.skills.melee.level }} 
+                (Опыт: {{ character.skills.melee.experience }} / {{ character.skills.melee.required_experience }})
+                <form action="{{ url_for('upgrade_skill', user_id=character.id, skill='melee') }}" method="POST">
+                    <input type="submit" value="Улучшить" class="upgrade-button">
+                </form>
+            </li>
+            <li>Холодное оружие - Уровень: {{ character.skills.cold_weapon.level }} 
+                (Опыт: {{ character.skills.cold_weapon.experience }} / {{ character.skills.cold_weapon.required_experience }})
+                <form action="{{ url_for('upgrade_skill', user_id=character.id, skill='cold_weapon') }}" method="POST">
+                    <input type="submit" value="Улучшить" class="upgrade-button">
+                </form>
+            </li>
+            <!-- Добавьте другие навыки по мере необходимости -->
         </ul>
     </div>
 
-    <h2>Энергия характеристик:</h2>
-    <p>Выносливость: <span id="stamina-energy">100</span></p>
-    <p>Сила: <span id="strength-energy">100</span></p>
-    <p>Меткость: <span id="accuracy-energy">100</span></p>
-    <p>Скорость: <span id="speed-energy">100</span></p>
-    <p>Конституция: <span id="constitution-energy">100</span></p>
+    <!-- Ссылка для возврата в главное меню -->
+    <div class="navigation">
+        <a href="{{ url_for('main_menu', user_id=character.id) }}" class="button">Назад в главное меню</a>
+    </div>
 </div>
 {% endblock %}

@@ -4,117 +4,24 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Бой</title>
-    <style>
-        body {
-            background-color: #7b08ff;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            margin: 0;
-            font-family: Arial, sans-serif;
-            flex-direction: column;
-        }
-
-        .battle-container {
-            display: flex;
-            justify-content: space-between;
-            width: 80%;
-            max-width: 600px;
-        }
-
-        .player {
-            text-align: center;
-            width: 30%;
-        }
-
-        .player img {
-            width: 100%;
-            height: auto;
-        }
-
-        .actions {
-            display: flex;
-            justify-content: center;
-            margin-top: 20px;
-        }
-
-        .attack-button {
-            background-color: #fff;
-            color: #000;
-            padding: 10px 20px;
-            border: 2px solid #000;
-            border-radius: 5px;
-            font-size: 16px;
-            cursor: pointer;
-            margin: 0 10px;
-            transition: 0.3s;
-        }
-
-        .attack-button:hover {
-            background-color: #000;
-            color: #fff;
-        }
-
-        .log-container {
-            width: 80%;
-            max-width: 600px;
-            height: 150px;
-            background-color: #333;
-            color: #00ff00;
-            padding: 10px;
-            margin-top: 20px;
-            border-radius: 5px;
-            overflow-y: auto;
-            font-family: monospace;
-            border: 2px solid #fff;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
-        }
-
-        .log-container p {
-            margin: 5px 0;
-        }
-
-        @media (max-width: 768px) {
-            .battle-container {
-                flex-direction: column;
-                align-items: center;
-            }
-
-            .player {
-                width: 80%;
-                margin-bottom: 20px;
-            }
-
-            .log-container {
-                width: 90%;
-                height: 200px;
-            }
-
-            .attack-button {
-                width: 80%;
-                margin-bottom: 10px; 
-            }
-        }
-    </style>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/static.css') }}">
 </head>
 <body>
     <div class="battle-container">
         <div class="player" id="player1">
-            <img src="{{ url_for('static', filename='css/ss.png') }}" alt="Игрок 1">
-            <h2>Игрок 1</h2>
+            <img src="{{ url_for('static', filename='css/character.png') }}" alt="Игрок 1">
+            <h2>Вы</h2>
             <p>Здоровье: <span id="health1">100</span></p>
             <p>Выносливость: <span id="stamina1">100</span></p>
         </div>
         <div class="player" id="player2">
-            <img src="{{ url_for('static', filename='css/dd.png') }}" alt="Игрок 2">
+            <img src="{{ url_for('static', filename='css/test.png') }}" alt="Игрок 2">
             <h2>Игрок 2</h2>
             <p>Здоровье: <span id="health2">100</span></p>
             <p>Выносливость: <span id="stamina2">100</span></p>
         </div>
     </div>
     <div class="actions">
-        
         <button class="attack-button" id="handAttack">Удар рукой</button>
         <button class="attack-button" id="legAttack">Удар ногой</button>
         <button class="attack-button" id="lightWeaponAttack">Выстрел из легкого оружия</button>
@@ -125,152 +32,169 @@
     <div class="log-container" id="log"></div>
 
     <script>
-      class Skill {
-          constructor(name) {
-              this.name = name; 
-              this.level = Math.floor(Math.random() * (5 - 1 + 1)) + 1; 
-          }
-          
-          getDamageBonus() {
-              return this.level; 
-          }
-          
-          getHitChanceBonus() {
-              return this.level * 5; 
-          }
-      }
+        class Skill {
+            constructor(name) {
+                this.name = name; 
+                this.level = Math.floor(Math.random() * (5 - 1 + 1)) + 1; 
+            }
+            
+            getDamageBonus() {
+                return this.level; 
+            }
+            
+            getHitChanceBonus() {
+                return this.level * 5; 
+            }
+        }
 
-      class Player {
-          constructor(name) {
-              this.name = name; 
-              this.health = 100; 
-              this.stamina = 100; 
-              this.maxStamina = 100;
+        class Player {
+            constructor(name) {
+                this.name = name; 
+                this.health = 100; 
+                this.stamina = 100; 
+                this.maxStamina = 100;
 
-              // Добавляем навыки
-              this.skills = [
-                  new Skill("Рукопашный бой"),
-                  new Skill("Холодное оружие"),
-                  new Skill("Легкое стрелковое оружие"),
-                  new Skill("Среднее стрелковое оружие"),
-                  new Skill("Тяжелое стрелковое оружие")
-              ];
-          }
+                // Добавляем навыки
+                this.skills = [
+                    new Skill("Рукопашный бой"),
+                    new Skill("Холодное оружие"),
+                    new Skill("Легкое стрелковое оружие"),
+                    new Skill("Среднее стрелковое оружие"),
+                    new Skill("Тяжелое стрелковое оружие")
+                ];
+            }
 
-          attack(damageRange) {
-              if (this.stamina > 0) {
-                  let damage = Math.floor(Math.random() * (damageRange.max - damageRange.min + 1)) + damageRange.min;
+            attack(damageRange) {
+                if (this.stamina > 0) {
+                    let damage = Math.floor(Math.random() * (damageRange.max - damageRange.min + 1)) + damageRange.min;
 
-                  
-                  damage += this.skills[0].getDamageBonus(); 
-                  
-                  this.stamina -= 10;
+                    damage += this.skills[0].getDamageBonus(); 
+                    
+                    this.stamina -= 10;
 
-                  return damage; 
-              }
-              return 0; 
-          }
+                    return damage; 
+                }
+                return 0; 
+            }
 
-          recover() {
-              this.stamina = Math.min(this.stamina + 20, this.maxStamina);
-          }
+            recover() {
+                this.stamina = Math.min(this.stamina + 20, this.maxStamina);
+            }
 
-          isAlive() { 
-              return this.health > 0; 
-          }
+            isAlive() { 
+                return this.health > 0; 
+            }
 
-          takeDamage(damage) { 
-              this.health -= damage; 
-              if (this.health < 0) this.health = 0; 
-          }
-      }
+            takeDamage(damage) { 
+                this.health -= damage; 
+                if (this.health < 0) this.health = 0; 
+            }
+        }
 
-      const player1 = new Player("Игрок 1");
-      const player2 = new Player("Игрок 2");
+        const player1 = new Player("Игрок 1");
+        const player2 = new Player("Игрок 2");
 
-      function updateUI() { 
-          document.getElementById('health1').innerText = player1.health; 
-          document.getElementById('stamina1').innerText = player1.stamina; 
-          document.getElementById('health2').innerText = player2.health; 
-          document.getElementById('stamina2').innerText = player2.stamina; 
-      }
+        function updateUI() { 
+            document.getElementById('health1').innerText = player1.health; 
+            document.getElementById('stamina1').innerText = player1.stamina; 
+            document.getElementById('health2').innerText = player2.health; 
+            document.getElementById('stamina2').innerText = player2.stamina; 
+        }
 
-      function logAction(action) { 
-          const logDiv = document.getElementById('log'); 
-          const logEntry = document.createElement('p'); 
-          logEntry.innerText = action; 
-          logDiv.appendChild(logEntry); 
-          logDiv.scrollTop = logDiv.scrollHeight; 
-      }
+        function logAction(action) { 
+            const logDiv = document.getElementById('log'); 
+            const logEntry = document.createElement('p'); 
+            logEntry.innerText = action; 
+            logDiv.appendChild(logEntry); 
+            logDiv.scrollTop = logDiv.scrollHeight; 
+        }
 
-      function playerTurn(attackType) { 
-          if (player1.isAlive() && player2.isAlive()) { 
+        function playerTurn(attackType) { 
+            if (player1.isAlive() && player2.isAlive()) { 
 
-              let damageRange;
+                let damageRange;
 
-              switch (attackType) {
-                  case 'hand':
-                      damageRange = { min: 5, max: 10 };
-                      break;
+                switch (attackType) {
+                    case 'hand':
+                        damageRange = { min: 5, max: 10 };
+                        break;
 
-                  case 'leg':
-                      damageRange = { min :10, max :15 };
-                      break;
+                    case 'leg':
+                        damageRange = { min :10, max :15 };
+                        break;
 
-                  case 'lightWeapon':
-                      damageRange = { min :8, max :12 }; 
-                      break;
+                    case 'lightWeapon':
+                        damageRange = { min :8, max :12 }; 
+                        break;
 
-                  case 'mediumWeapon':
-                      damageRange = { min :15, max :25 }; 
-                      break;
+                    case 'mediumWeapon':
+                        damageRange = { min :15, max :25 }; 
+                        break;
 
-                  case 'heavyWeapon':
-                      damageRange = { min :20, max :30 }; 
-                      break;
+                    case 'heavyWeapon':
+                        damageRange = { min :20, max :30 }; 
+                        break;
 
-                  case 'coldWeapon':
-                      damageRange = { min :12, max :18 }; 
-                      break;
+                    case 'coldWeapon':
+                        damageRange = { min :12, max :18 }; 
+                        break;
 
-                  default:
-                      damageRange = { min :5, max :10 }; 
-                      break;
-              }
+                    default:
+                        damageRange = { min :5, max :10 }; 
+                        break;
+                }
 
-              
-              let damage1 = player1.attack(damageRange); 
-              player2.takeDamage(damage1); 
-              logAction(`${player1.name} наносит удар ${attackType === 'hand' ? 'рукой' : attackType === 'leg' ? 'ногой' : attackType === 'lightWeapon' ? 'из легкого оружия' : attackType === 'mediumWeapon' ? 'из среднего оружия' : attackType === 'heavyWeapon' ? 'из тяжелого оружия' : 'холодным оружием'} и наносит ${damage1} урона!`);
+                let damage1 = player1.attack(damageRange); 
+                player2.takeDamage(damage1); 
+                logAction(`${player1.name} наносит удар ${attackType === 'hand' ? 'рукой' : attackType === 'leg' ? 'ногой' : attackType === 'lightWeapon' ? 'из легкого оружия' : attackType === 'mediumWeapon' ? 'из среднего оружия' : attackType === 'heavyWeapon' ? 'из тяжелого оружия' : 'холодным оружием'} и наносит ${damage1} урона!`);
 
-              if (player2.isAlive()) { 
+                // Создаем эффект "крови"
+                if (damage1 > 0) {
+                    createBloodEffect(player2);
+                }
 
-                  
-                  let damage2 = player2.attack({ min :5, max :15 }); 
-                  player1.takeDamage(damage2); 
-                  logAction(`${player2.name} отвечает и наносит ${damage2} урона!`); 
-              } 
+                if (player2.isAlive()) { 
+                    let damage2 = player2.attack({ min :5, max :15 }); 
+                    player1.takeDamage(damage2); 
+                    logAction(`${player2.name} отвечает и наносит ${damage2} урона!`); 
 
-              player1.recover(); 
-              player2.recover(); 
-              updateUI(); 
+                    // Создаем эффект "крови"
+                    if (damage2 > 0) {
+                        createBloodEffect(player1);
+                    }
+                } 
 
-              if (!player1.isAlive()) { 
-                  logAction(`${player2.name} победил!`); 
-              } else if (!player2.isAlive()) { 
-                  logAction(`${player1.name} победил!`); 
-              } 
-          } 
-      } 
+                player1.recover(); 
+                player2.recover(); 
+                updateUI(); 
 
-      document.getElementById('handAttack').addEventListener('click', () => playerTurn('hand')); 
-      document.getElementById('legAttack').addEventListener('click', () => playerTurn('leg')); 
-      document.getElementById('lightWeaponAttack').addEventListener('click', () => playerTurn('lightWeapon')); 
-      document.getElementById('mediumWeaponAttack').addEventListener('click', () => playerTurn('mediumWeapon')); 
-      document.getElementById('heavyWeaponAttack').addEventListener('click', () => playerTurn('heavyWeapon')); // Обработчик для тяжелого оружия
-      document.getElementById('coldWeaponAttack').addEventListener('click', () => playerTurn('coldWeapon')); // Обработчик для холодного оружия
+                if (!player1.isAlive()) { 
+                    logAction(`${player2.name} победил!`); 
+                } else if (!player2.isAlive()) { 
+                    logAction(`${player1.name} победил!`); 
+                } 
+            } 
+        } 
 
-      updateUI(); 
+        document.getElementById('handAttack').addEventListener('click', () => playerTurn('hand')); 
+        document.getElementById('legAttack').addEventListener('click', () => playerTurn('leg')); 
+        document.getElementById('lightWeaponAttack').addEventListener('click', () => playerTurn('lightWeapon')); 
+        document.getElementById('mediumWeaponAttack').addEventListener('click', () => playerTurn('mediumWeapon')); 
+        document.getElementById('heavyWeaponAttack').addEventListener('click', () => playerTurn('heavyWeapon')); 
+        document.getElementById('coldWeaponAttack').addEventListener('click', () => playerTurn('coldWeapon')); 
+
+        updateUI(); 
+
+        function createBloodEffect(player) {
+            const blood = document.createElement('div');
+            blood.className = 'blood-effect';
+            blood.style.left = Math.random() * 100 + 'vw';
+            blood.style.top = Math.random() * 100 + 'vh';
+            document.body.appendChild(blood);
+            setTimeout(() => {
+                blood.remove();
+            }, 1000);
+        }
     </script>
 </body>
 </html>

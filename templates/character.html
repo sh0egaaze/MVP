@@ -6,12 +6,30 @@
 
 {% block body %}
 <div class="character-section">
-    <h1>Персонаж</h1>
-    <p>В данном разделе можно рассмотреть общий свод характеристик и данных о персонаже.</p>
+    <div class="character-info">
+        <h1>Персонаж</h1>
+        <p>В данном разделе можно рассмотреть общий свод характеристик и данных о персонаже.</p>
+
+        <div class="character-details">
+            <div class="character-image">
+                <img src="{{ url_for('static', filename='css/character.png') }}" alt="Персонаж" class="main-image">
+            </div>
+            <div class="character-stats">
+                <p><strong>Никнейм:</strong> {{ character.nickname }}</p>
+                <p><strong>Уровень:</strong> {{ character.level }}</p>
+                <p><strong>Текущий опыт:</strong> {{ character.current_experience }}</p>
+                <p><strong>Необходимый опыт для следующего уровня:</strong> {{ character.required_experience }}</p>
+                <p><strong>Кредиты:</strong> {{ character.credits }}</p>
+            </div>
+        </div>
+    </div>
+
+<!-- Кнопки для навигации и возврата в главное меню -->
     <div class="center-buttons">
-        <a href="#" class="button">Характеристики</a>
-        <a href="#" class="button">Навыки</a>
-        <a href="#" class="button">Приёмы</a>
+        <a href="{{ url_for('attributes_view', user_id=character.id) }}" class="button">Характеристики</a>
+        <a href="{{ url_for('skills_view', user_id=character.id) }}" class="button">Навыки</a>
+        <a href="{{ url_for('abilities_view', user_id=character.id) }}" class="button">Приемы</a>
+        <a href="{{ url_for('main_menu', user_id=character.id) }}" class="button back-button">Назад в главное меню</a>
     </div>
 </div>
 {% endblock %}

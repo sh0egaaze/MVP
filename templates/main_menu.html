@@ -8,11 +8,14 @@
 <div class="about">
     <div class="scroll">
         <img src="{{ url_for('static', filename='css/1.png') }}" class="main-image" alt="Main Image">
+        <h1>Добро пожаловать, {{ character.nickname }}!</h1>
         <div class="center-buttons">
-            <a href="{{ url_for('character') }}" class="button">Персонаж</a>
+            <!-- Используем правильный эндпоинт 'character_view' -->
+            <a href="{{ url_for('character_view', user_id=character.id) }}" class="button">Персонаж</a>
             <a href="{{ url_for('inventory') }}" class="button">Инвентарь</a>
             <a href="{{ url_for('home') }}" class="button">Дом (база игрока)</a>
             <a href="{{ url_for('arena') }}" class="button">Арена</a>
+            <!-- Эти ссылки временно можно оставить пустыми, если нет соответствующих маршрутов -->
             <a href="#" class="button">Магазин</a>
             <a href="#" class="button">Добыча ресурсов</a>
             <a href="#" class="button">Производство</a>
